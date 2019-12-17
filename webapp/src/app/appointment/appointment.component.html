@@ -6,16 +6,6 @@
                 <form [formGroup]="appointmentForm" (submit)="onAppointmentFormSubmit()">
 
                     <div class="row">
-                    <div class="col-12 col-sm-12 col-md-6 col-lg-4">
-                        <div class="form-group">
-                            <label for="userId">User Id</label>
-                            <input type="text" formControlName="userId" class="form-control">
-                           
-                            <span class="validation-error" *ngIf="userId.touched && userId.hasError('required')">COntact No  cannot be empty</span>
-                            <span class="validation-error" *ngIf="userId.hasError('maxlength')">Contact No cannot exceed 10 characters.</span>
-                            <span class="validation-error" *ngIf="userId.hasError('pattern')">Only numbers can be entered</span>
-                        </div>
-
                     </div>
                             <div class="col-12 col-sm-12 col-md-6 col-lg-4">
                                     <div class="form-group">
@@ -54,13 +44,22 @@
                         </div>
                         <div class="col-12 col-sm-12 col-md-6 col-lg-4">
                             <div class="form-group">
+                                <label for="medicareService">Medicare Service</label>
+                                <input type="text" name="medicareService" formControlName="medicareService" class="form-control">
+                                <span class="validation-error" *ngIf="medicareService.touched && medicareService.hasError('required')">First name cannot be empty</span>
+                                <span class="validation-error" *ngIf="medicareService.hasError('maxlength')">Lastname cannot exceed 50 characters.</span>
+                                <span class="validation-error" *ngIf="medicareService.hasError('pattern')">Special Characters are not allowed</span>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-sm-12 col-md-6 col-lg-4">
+                            <div class="form-group">
                                 <label for="doctor">Doctor</label>
                                 <select name="doctor" formControlName="doctor" class="form-control">
                                     <option [value]="doc" *ngFor="let doc of doctors">{{doc}}</option>
                                     </select>
                     </div>
                     </div>
-                </div>
                     <div class="row">
                             <input type="submit" class="btn btn-danger" value="Register">
                     </div>

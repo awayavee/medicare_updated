@@ -14,6 +14,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.cognizant.medicareservice.entities.Doctor;
+import com.cognizant.medicareservice.entities.MedicareServices;
 import com.cognizant.medicareservice.entities.Role;
 import com.cognizant.medicareservice.entities.User;
 import com.cognizant.medicareservice.exception.UserAlreadyExistsException;
@@ -83,16 +84,8 @@ public class AppUserDetailsService implements UserDetailsService {
 			} else if (newUser.getDoctor() != null) {
 				newUser.setAdmin(null);
 				Doctor newDoctor=newUser.getDoctor();
-				/*
-				MedicareServices medicareServices=medicareServicesRepository.findById(1).get();
-				Set<MedicareServices> medicareServicesList = new HashSet<MedicareServices>();
-				medicareServicesList.add(medicareServices);
-				newDoctor.setMedicareServiceList(medicareServicesList);
-				*/
 				
 				newUser.setDoctor(newDoctor);
-				
-				
 				newUser.setPatient(null);
 				newUser.setAgent(null);
 

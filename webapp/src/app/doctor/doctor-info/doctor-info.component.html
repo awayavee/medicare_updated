@@ -14,7 +14,7 @@
             </div>
         </div>
         <div class="card-footer">
-            <a [routerLink]="['/appointment']">
+            <a [routerLink]="['/appointment',doctor.id]">
                 <div class="btn btn-dark container-fluid">Book Appointment</div>
             </a>
             <a [routerLink]="['/doctorEdit',doctor.id]">

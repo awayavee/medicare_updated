@@ -21,6 +21,7 @@ doctorImg:string[]=['https://images.unsplash.com/photo-1550831107-1553da8c8464?i
   constructor(private authService:AuthService) { }
 
   ngOnInit() {
+  
   }
   isEditAllowed(){
     return this.authService.loggedIn && this.authService.isAdmin

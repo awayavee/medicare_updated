@@ -76,8 +76,6 @@ public class AppUserDetailsService implements UserDetailsService {
 				newUser.setDoctor(null);
 				newUser.setPatient(null);
 				newUser.setAgent(null);
-
-
 				Role role = roleRepository.findByRoleId(1);
 				Set<Role> roleList = new HashSet<Role>();
 				roleList.add(role);
@@ -85,13 +83,11 @@ public class AppUserDetailsService implements UserDetailsService {
 			} else if (newUser.getDoctor() != null) {
 				newUser.setAdmin(null);
 				Doctor newDoctor=newUser.getDoctor();
-				/*
-				MedicareServices medicareServices=medicareServicesRepository.findById(1).get();
-				Set<MedicareServices> medicareServicesList = new HashSet<MedicareServices>();
-				medicareServicesList.add(medicareServices);
-				newDoctor.setMedicareServiceList(medicareServicesList);
-				*/
-				
+				MedicareServices ms=newDoctor.getMedicareServices();
+				ms.setMedicareService(newDoctor.getMedicareServices().getMedicareService());
+				ms.setServiceDescription(newDoctor.getMedicareServices().getServiceDescription());
+				ms.setAmount(newDoctor.getMedicareServices().getAmount());
+				newDoctor.setMedicareServices(ms);
 				newUser.setDoctor(newDoctor);
 				
 				

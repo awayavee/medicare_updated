@@ -22,11 +22,11 @@ export class AppointmentComponent implements OnInit {
 
 
     this.appointmentForm=new FormGroup({
-    'userId': new FormControl(null, [Validators.required,Validators.pattern('^[0-9]+$'), Validators.maxLength(20)]),
     'patientFirstName': new FormControl(null, [Validators.required,Validators.pattern('^[a-zA-Z0-9]+$'), Validators.maxLength(50)]),
     'patientLastName': new FormControl(null, [Validators.required,Validators.pattern('^[a-zA-Z0-9]+$'), Validators.maxLength(50)]),
     'bookingDate': new FormControl(null, [Validators.required]),
     'appointmentDate': new FormControl(null, [Validators.required]),
+    'medicareService':new FormControl(null, [Validators.required,Validators.pattern('^[a-zA-Z0-9]+$'), Validators.maxLength(50)]),
     'doctor': new FormControl(null, [Validators.required,Validators.maxLength(20)]),
   
   });
@@ -98,9 +98,7 @@ onAppointmentFormSubmit(){
   // })
 }
 
-get userId(){
-  return this.appointmentForm.get('userId');
-}
+
 get patientFirstName(){
   return this.appointmentForm.get('patientFirstName');
 }
@@ -112,6 +110,9 @@ get bookingDate(){
 }
 get appointmentDate(){
   return this.appointmentForm.get('appointmentDate');
+}
+get medicareService(){
+  return this.appointmentForm.get('medicareService');
 }
 get doctor(){
   return this.appointmentForm.get('doctor');

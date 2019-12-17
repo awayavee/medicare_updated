@@ -1,3 +1,5 @@
+import { MedicareService } from './medicare-service.model';
+
 export interface Doctor{
 
     id?:number;
@@ -20,4 +22,5 @@ export interface Doctor{
     workHours:string;
     hospitalName:string;
     status?:boolean;
+    medicareServices:MedicareService
 }

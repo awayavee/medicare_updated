@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -31,9 +32,10 @@ public class Appoinment {
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", locale = "pt-BR", timezone = "IST")
 	private Date appointmentDate;
 	@Column(name = "ap_status")
-	private int status;
-	@Column(name = "ap_disease")
-	private String disease;
+	private boolean status;
+	@OneToOne
+	@JoinColumn(name = "ap_medicare_service_id")
+	private MedicareServices medicareServices;
 	@ManyToOne
 	@JoinColumn(name = "ap_dc_id")
 	private Doctor doctor;
@@ -46,7 +48,7 @@ public class Appoinment {
 	}
 
 	public Appoinment(int id, String patientFirstName, String patientLastName, Date bookingDate, Date appointmentDate,
-			int status, String disease, Doctor doctor, User user) {
+			boolean status, MedicareServices medicareServices, Doctor doctor, User user) {
 		super();
 		this.id = id;
 		this.patientFirstName = patientFirstName;
@@ -54,10 +56,22 @@ public class Appoinment {
 		this.bookingDate = bookingDate;
 		this.appointmentDate = appointmentDate;
 		this.status = status;
-		this.disease = disease;
+		this.medicareServices = medicareServices;
 		this.doctor = doctor;
 		this.user = user;
 	}
+
+	public MedicareServices getMedicareServices() {
+		return medicareServices;
+	}
+
+
+
+	public void setMedicareServices(MedicareServices medicareServices) {
+		this.medicareServices = medicareServices;
+	}
+
+
 
 	public int getId() {
 		return id;
@@ -103,20 +117,12 @@ public class Appoinment {
 		this.appointmentDate = appointmentDate;
 	}
 
-	public int getStatus() {
+	public boolean isStatus() {
 		return status;
 	}
 
-	public void setStatus(int status) {
+	public void setStatus(boolean status) {
 		this.status = status;
-	}
-
-	public String getDisease() {
-		return disease;
-	}
-
-	public void setDisease(String disease) {
-		this.disease = disease;
 	}
 
 	public Doctor getDoctor() {
@@ -133,6 +139,16 @@ public class Appoinment {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+
+
+	@Override
+	public String toString() {
+		return "Appoinment [id=" + id + ", patientFirstName=" + patientFirstName + ", patientLastName="
+				+ patientLastName + ", bookingDate=" + bookingDate + ", appointmentDate=" + appointmentDate
+				+ ", status=" + status + ", medicareServices=" + medicareServices + ", doctor=" + doctor + ", user="
+				+ user + "]";
 	}
 
 }

@@ -5,6 +5,7 @@ import { Doctor } from 'src/app/model/doctor.model';
 import { User } from 'src/app/model/user.model';
 import { UserService } from 'src/app/services/user.service';
 import { Router } from '@angular/router';
+import { MedicareService } from 'src/app/model/medicare-service.model';
 
 @Component({
   selector: 'app-doctor-signup',
@@ -14,6 +15,7 @@ import { Router } from '@angular/router';
 export class DoctorSignupComponent implements OnInit {
   doctor:Doctor;
   user:User;
+  medicareServices:MedicareService
   formSubmitted=false;
 
   doctorRegisterForm=this.formBuilder.group({
@@ -48,7 +50,13 @@ export class DoctorSignupComponent implements OnInit {
   }
   onSignUpSubmit(){
     console.log("helllo signup");
-    console.log(this.doctorRegisterForm.value['zipcode']);
+    console.log(this.doctorRegisterForm.value['medicareService']);
+    this.medicareServices={
+      medicareService:this.doctorRegisterForm.value['medicareService'],
+      serviceDescription:this.doctorRegisterForm.value['serviceDescription'],
+      amount:this.doctorRegisterForm.value['amount']
+    }
+    console.log(this.medicareServices)
     this.doctor={
  
       firstName:this.doctorRegisterForm.value['firstname'],
@@ -68,7 +76,8 @@ export class DoctorSignupComponent implements OnInit {
       degree:this.doctorRegisterForm.value['degree'],
       speciality:this.doctorRegisterForm.value['speciality'],
       workHours:this.doctorRegisterForm.value['workHours'],
-      hospitalName:this.doctorRegisterForm.value['hospitalName']
+      hospitalName:this.doctorRegisterForm.value['hospitalName'],
+      medicareServices:this.medicareServices
         }
       
       this.user={
@@ -149,6 +158,17 @@ export class DoctorSignupComponent implements OnInit {
     return this.doctorRegisterForm.get('status');
   }
 
-
+  get medicareService()
+  {
+    return this.doctorRegisterForm.get('medicareService');
+  }
+  get serviceDescription()
+  {
+    return this.doctorRegisterForm.get('serviceDescription');
+  }
+  get amount()
+  {
+    return this.doctorRegisterForm.get('amount');
+  }
 
 }

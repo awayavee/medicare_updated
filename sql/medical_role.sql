@@ -19,4 +19,5 @@ insert into medical.doctor values(1,'abhinav','sharma',22,'male','1997-03-24',85
 
 select * from medical.user_role;
 select * from medical.user;
+select * from medical.medicare_services;
 select * from medical.role;

@@ -13,7 +13,7 @@ import { AgentSignupComponent } from './site/agent-signup/agent-signup.component
 import { DoctorSignupComponent } from './site/doctor-signup/doctor-signup.component';
 import { SignupOptionComponent } from './site/signup-option/signup-option.component';
 import { HomeComponent } from './home/home/home.component';
-import { NguCarouselModule } from '@ngu/carousel';
+// import { NguCarouselModule } from '@ngu/carousel';
 import { PatientHomeComponent } from './home/patient-home/patient-home.component';
 import { DoctorHomeComponent } from './home/doctor-home/doctor-home.component';
 import { AdminHomeComponent } from './home/admin-home/admin-home.component';
@@ -59,7 +59,7 @@ import { AppointmentComponent } from './appointment/appointment.component';
   
   ],
   imports: [
-    NguCarouselModule,
+    // NguCarouselModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,

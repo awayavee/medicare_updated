@@ -2,12 +2,18 @@ package com.cognizant.medical.entities;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 @Table(name = "doctor")
@@ -52,13 +58,20 @@ public class Doctor {
 	private String workHours;
 	@Column(name = "dc_hospital_name")
 	private String hospitalName;
+	@JsonIgnore
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "dc_ms_id")
+	private MedicareServices medicareServices;
 
 	public Doctor() {
 		super();
 	}
+	
+
 	public Doctor(int id, String firstName, String lastName, int age, String gender, Date dateOfBirth, String contactNo,
 			String altContactNo, String email, String password, String address1, String address2, String city,
-			String state, String zipCode, String degree, String speciality, String workHours, String hospitalName) {
+			String state, String zipCode, String degree, String speciality, String workHours, String hospitalName,
+			com.cognizant.medical.entities.MedicareServices medicareServices) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
@@ -79,6 +92,7 @@ public class Doctor {
 		this.speciality = speciality;
 		this.workHours = workHours;
 		this.hospitalName = hospitalName;
+		this.medicareServices = medicareServices;
 	}
 
 
@@ -232,6 +246,27 @@ public class Doctor {
 
 	public void setHospitalName(String hospitalName) {
 		this.hospitalName = hospitalName;
+	}
+
+
+	public MedicareServices getMedicareServices() {
+		return medicareServices;
+	}
+
+
+	public void setMedicareServices(MedicareServices medicareServices) {
+		this.medicareServices = medicareServices;
+	}
+
+
+	@Override
+	public String toString() {
+		return "Doctor [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", age=" + age + ", gender="
+				+ gender + ", dateOfBirth=" + dateOfBirth + ", contactNo=" + contactNo + ", altContactNo="
+				+ altContactNo + ", email=" + email + ", password=" + password + ", address1=" + address1
+				+ ", address2=" + address2 + ", city=" + city + ", state=" + state + ", zipCode=" + zipCode
+				+ ", degree=" + degree + ", speciality=" + speciality + ", workHours=" + workHours + ", hospitalName="
+				+ hospitalName + ", medicareServices=" + medicareServices + "]";
 	}
 
 	
