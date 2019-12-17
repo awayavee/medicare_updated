@@ -1,0 +1,39 @@
+#carousel-item{
+    height:600px;
+    width:75%;  
+}
+
+.box1{
+    background: rgba(6, 0, 27, 0.5);
+    height:400px;
+    width:100%;
+    
+    color:white;
+}
+
+.box2{
+    background: rgba(6, 0, 27, 0.5);
+     height:400px;
+     width:100%;
+    
+     color:white;
+ }
+
+ .box3{
+    background: rgba(6, 0, 27, 0.5);
+    height:400px;
+     width:100%;
+    
+     color:white;
+ }
+
+ h1{
+     text-align:center;
+ }
+
+ .img1{
+     height:300px;
+     width:300px;
+  
+ }
+
