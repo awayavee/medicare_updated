@@ -31,6 +31,9 @@ import { PatientEditComponent } from './patient/patient-edit/patient-edit.compon
 import { PatientInfoComponent } from './patient/patient-info/patient-info.component';
 import { PatientListComponent } from './patient/patient-list/patient-list.component';
 import { AppointmentComponent } from './appointment/appointment.component';
+import { ViewAppointmentComponent } from './view-appointment/view-appointment.component';
+import { MedicalTestHistoryComponent } from './medical-test-history/medical-test-history.component';
+import { ViewMedicareTestHistoryComponent } from './view-medicare-test-history/view-medicare-test-history.component';
 
 
 @NgModule({
@@ -56,6 +59,9 @@ import { AppointmentComponent } from './appointment/appointment.component';
     PatientInfoComponent,
     PatientListComponent,
     AppointmentComponent,
+    ViewAppointmentComponent,
+    MedicalTestHistoryComponent,
+    ViewMedicareTestHistoryComponent,
   
   ],
   imports: [

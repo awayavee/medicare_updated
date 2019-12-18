@@ -19,5 +19,8 @@ insert into medical.doctor values(1,'abhinav','sharma',22,'male','1997-03-24',85
 
 select * from medical.user_role;
 select * from medical.user;
-select * from medical.medicare_services;
+select * from medical.patient;
+select * from medical.medical_test_history;
 select * from medical.role;
+
+INSERT INTO `medical`.`medical_test_history` (`mt_report_id`, `mt_customer_id`, `mt_doctor_id`, `mt_ms_id`, `mt_agent_id`, `mt_service_date`, `mt_test_result_date`, `mt_diag_1_actual_value`, `mt_diag_1_normal_range`, `mt_diag_2_actual_value`, `mt_diag_2_normal_range`, `mt_doc_comments`, `mt_other_info`, `mt_pt_id`) VALUES ('1', '1', '1', '1', '0', '2019-12-19', '2019-12-19', '10', '10', '80', '100', 'ill', 'no', '1');

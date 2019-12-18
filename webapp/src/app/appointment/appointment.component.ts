@@ -39,7 +39,9 @@ export class AppointmentComponent implements OnInit {
   
   });
     this.userService.getUser(this.userAuthService.getUser()).subscribe(data=>{
+      console.log(data);
       this.user=data;
+
     })
    this.route.params.subscribe((params: Params) => {
   const doctorId = params['id']
@@ -74,11 +76,13 @@ onAppointmentFormSubmit(){
     patientFirstName:this.appointmentForm.value['patientFirstName'],
     patientLastName:this.appointmentForm.value['patientLastName'],
     bookingDate:this.appointmentForm.value['bookingDate'],
-    AppointmentDate:this.appointmentForm.value['AppointmentDate'],
+    appointmentDate:this.appointmentForm.value['appointmentDate'],
+    medicareServices:this.doctors.medicareServices,
     doctor:this.doctors,
     user:this.user
 
   }
+  console.log(this.appointment);
   this.appointmentervice.addAppointment(this.appointment).subscribe(data=>{
     console.log("Appointment added");
   })

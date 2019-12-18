@@ -16,11 +16,14 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cognizant.medicareservice.entities.Agent;
 import com.cognizant.medicareservice.entities.Appoinment;
 import com.cognizant.medicareservice.entities.Doctor;
+import com.cognizant.medicareservice.entities.MedicalTestHistory;
 import com.cognizant.medicareservice.entities.Patient;
 import com.cognizant.medicareservice.entities.User;
+import com.cognizant.medicareservice.reporities.MedicalTestHistoryRepository;
 import com.cognizant.medicareservice.service.AgentService;
 import com.cognizant.medicareservice.service.AppointmentService;
 import com.cognizant.medicareservice.service.DoctorService;
+import com.cognizant.medicareservice.service.MedicalTestHistoryService;
 import com.cognizant.medicareservice.service.PatientService;
 import com.cognizant.medicareservice.service.UserService;
 
@@ -37,6 +40,9 @@ public class MedicareController {
 	DoctorService doctorService;
 	@Autowired
 	AppointmentService appointmentService;
+	@Autowired
+	MedicalTestHistoryService medicalTestHistoryService;
+	
 
 	@GetMapping("/users")
 	public List<User> getAllUsers() {
@@ -108,4 +114,20 @@ public class MedicareController {
 	public void addAppointment(@RequestBody @Valid Appoinment appointment)
 	{appointmentService.add(appointment);
 	}
+	@GetMapping("/appointment/{id}")
+	public List<Appoinment> getAllAppointments(@PathVariable int id)
+	{
+		return appointmentService.getAll(id);
+	}
+	@PutMapping("/appointment/{id}")
+	public void updateAppointmentStatus(@PathVariable int id)
+	{
+		appointmentService.modifyStatus(id);
+	}
+	@GetMapping("/history")
+	public List<MedicalTestHistory> getAllMedicalTestHistory()
+	{
+		return medicalTestHistoryService.getAll();
+	}
+
 }

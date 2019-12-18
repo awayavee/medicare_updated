@@ -355,12 +355,11 @@ CREATE TABLE IF NOT EXISTS `medical`.`appointment` (
   `ap_appointment_date` VARCHAR(45) NOT NULL,
   `ap_status` INT NOT NULL,
   `ap_medicare_service_id` INT NOT NULL,
-  `ap_doctor_id` INT NOT NULL,
-  `doctor_dc_id` INT NOT NULL,
+  `ap_dc_id` INT NOT NULL,
   PRIMARY KEY (`ap_id`),
-  INDEX `fk_appointment_doctor1_idx` (`doctor_dc_id` ASC),
+  INDEX `fk_appointment_doctor1_idx` (`ap_dc_id` ASC),
   CONSTRAINT `fk_appointment_doctor1`
-    FOREIGN KEY (`doctor_dc_id`)
+    FOREIGN KEY (`ap_dc_id`)
     REFERENCES `medical`.`doctor` (`dc_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)

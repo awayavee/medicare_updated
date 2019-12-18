@@ -18,7 +18,7 @@ export class UserService {
     constructor(private http:HttpClient, private userAuthService:UserAuthService) {
     }
 
-    getUser(username:string):Observable<any>{
+    getUserStatus(username:string):Observable<any>{
 
         const httpOptions={
             headers:new HttpHeaders({
@@ -28,6 +28,18 @@ export class UserService {
         };
 
         return this.http.get<any>(`${this.baseUrl+ "/users"}/${username}`, httpOptions);
+
+    }
+    getUser(username:string):Observable<any>{
+
+        const httpOptions={
+            headers:new HttpHeaders({
+                'Content-Type':'application/json',
+                'Authorization':'Bearer '+ this.userAuthService.getToken()
+            })
+        };
+
+        return this.http.get<any>(`${this.baseUrl+ "/users/getuser"}/${username}`, httpOptions);
 
     }
 

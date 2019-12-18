@@ -13,11 +13,14 @@
             <li class="nav-item" *ngIf="isPatient()">
                 <a routerLink="#" class="nav-link">Notification</a>
             </li>
+            <li class="nav-item" *ngIf="isPatient()">
+                <a routerLink="viewMedicalTest" class="nav-link">Medical Test History</a>
+            </li>
             <li class="nav-item" *ngIf="isAdmin()">
                 <a routerLink="#" class="nav-link">Services</a>
             </li>
             <li class="nav-item" *ngIf="isDoctor()">
-                <a routerLink="#" class="nav-link">Appointments</a>
+                <a routerLink="viewAppointment" class="nav-link">Appointments</a>
             </li>
             <li class="nav-item" *ngIf="isAdmin()">
                 <a routerLink="#" class="nav-link">Medicare Service</a>

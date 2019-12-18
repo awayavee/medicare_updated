@@ -17,6 +17,9 @@ import { DoctorEditComponent } from './doctor/doctor-edit/doctor-edit.component'
 import { PatientListComponent } from './patient/patient-list/patient-list.component';
 import { PatientEditComponent } from './patient/patient-edit/patient-edit.component';
 import { AppointmentComponent } from './appointment/appointment.component';
+import { ViewAppointmentComponent } from './view-appointment/view-appointment.component';
+import { MedicalTestHistoryComponent } from './medical-test-history/medical-test-history.component';
+import { ViewMedicareTestHistoryComponent } from './view-medicare-test-history/view-medicare-test-history.component';
 
 
 
@@ -37,7 +40,9 @@ const routes: Routes = [
   {path:'doctorList', component:DoctorListComponent},
   {path:'agentHome', component:AgentHomeComponent},
   {path:'patientList', component:PatientListComponent},
-  {path:'appointment/:id', component:AppointmentComponent}
+  {path:'appointment/:id', component:AppointmentComponent},
+  {path:'viewAppointment',component:ViewAppointmentComponent},
+  {path:'viewMedicalTest',component:ViewMedicareTestHistoryComponent}
   //{path:'agentList', component:AgentListComponent},
 
 ];

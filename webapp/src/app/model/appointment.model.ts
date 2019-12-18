@@ -1,5 +1,6 @@
 import { Doctor } from './doctor.model';
 import { User } from './user.model';
+import { MedicareService } from './medicare-service.model';
 
 export interface Appointment
 {
@@ -7,8 +8,9 @@ export interface Appointment
     patientFirstName:string;
     patientLastName:string;
     bookingDate:Date;
-    AppointmentDate:Date;
+    appointmentDate:Date;
     status?:boolean;
+    medicareServices:MedicareService;
     doctor:Doctor;
     user:User;
 
