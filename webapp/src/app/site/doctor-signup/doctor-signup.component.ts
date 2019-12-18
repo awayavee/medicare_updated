@@ -77,15 +77,21 @@ export class DoctorSignupComponent implements OnInit {
       speciality:this.doctorRegisterForm.value['speciality'],
       workHours:this.doctorRegisterForm.value['workHours'],
       hospitalName:this.doctorRegisterForm.value['hospitalName'],
-      medicareServices:this.medicareServices
-        }
-      
+      medicareServices:{
+      medicareService:this.doctorRegisterForm.value['medicareService'],
+      serviceDescription:this.doctorRegisterForm.value['serviceDescription'],
+      amount:this.doctorRegisterForm.value['amount']
+    }
+  }
+        
+     
       this.user={
           username:this.doctorRegisterForm.value['username'],
           password:this.doctorRegisterForm.value['password'],
           doctor:this.doctor
         }
-      
+        console.log(this.user);
+        console.log(this.user.doctor.medicareServices)
         this.userService.addUser(this.user).subscribe((data)=>{
           console.log(this.user+" doctor signup")
       

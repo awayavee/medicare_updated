@@ -32,8 +32,9 @@ export class UserService {
     }
 
     addUser(user:User){
+       
 
-        return this.http.post(this.baseUrl+"/users", user);
+        return this.http.post<void>(`${this.baseUrl}/users`, user);
     }
 
 

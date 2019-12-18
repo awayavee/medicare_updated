@@ -1,6 +1,5 @@
 package com.cognizant.medical.entities;
 
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -25,13 +24,13 @@ public class MedicareServices {
 	@Column(name = "ms_amount")
 	private double amount;
 	
+
 	public MedicareServices() {
 
 		super();
 	}
 
-	
-
+	 
 	public MedicareServices(int id, String medicareService, String serviceDescription, double amount) {
 		super();
 		this.id = id;
@@ -39,7 +38,6 @@ public class MedicareServices {
 		this.serviceDescription = serviceDescription;
 		this.amount = amount;
 	}
-
 
 
 	public int getId() {
@@ -74,17 +72,17 @@ public class MedicareServices {
 		this.amount = amount;
 	}
 
-
-
 	@Override
 	public String toString() {
 		return "MedicareServices [id=" + id + ", medicareService=" + medicareService + ", serviceDescription="
 				+ serviceDescription + ", amount=" + amount + "]";
 	}
 
+	
 
 
-	
-	
+
+
+
 
 }

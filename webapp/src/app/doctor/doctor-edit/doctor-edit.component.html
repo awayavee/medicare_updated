@@ -199,7 +199,36 @@
                             </div>
                         </div>
 
-                        
+                        <div class="col-12 col-sm-12 col-md-6 col-lg-4">
+                            <div class="form-group">
+                                <label for="medicareService">Medicare Service</label>
+                                <input type="text" class="form-control" formControlName="medicareService" id="medicareService"
+                                    name="medicareService">
+                                    <span class="validation-error" *ngIf="medicareService.touched && medicareService.hasError('required')">Medicare Service  cannot be empty</span>
+                                    <span class="validation-error" *ngIf="medicareService.hasError('maxlength')">Medicare Service cannot exceed 100 characters.</span>
+                      
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-6 col-lg-4">
+                            <div class="form-group">
+                                <label for="serviceDescription">Service Description</label>
+                                <input type="text" class="form-control" formControlName="serviceDescription" id="serviceDescription"
+                                    name="serviceDescription">
+                                    <span class="validation-error" *ngIf="serviceDescription.touched && serviceDescription.hasError('required')">Service Description  cannot be empty</span>
+                                    <span class="validation-error" *ngIf="serviceDescription.hasError('maxlength')">Service Description cannot exceed 100 characters.</span>
+                      
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-6 col-lg-4">
+                            <div class="form-group">
+                                <label for="amount">Amount</label>
+                                <input type="text" class="form-control" formControlName="amount" id="amount"
+                                    name="amount">
+                                    <span class="validation-error" *ngIf="amount.touched && amount.hasError('required')">Amount  cannot be empty</span>
+                                    <span class="validation-error" *ngIf="amount.hasError('pattern')">Only numbers can be entered</span>
+                      
+                            </div>
+                        </div>
 
                     </div>
                     <div class="row">

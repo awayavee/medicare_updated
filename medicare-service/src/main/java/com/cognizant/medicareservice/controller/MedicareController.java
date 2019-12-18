@@ -2,19 +2,24 @@ package com.cognizant.medicareservice.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cognizant.medicareservice.entities.Agent;
+import com.cognizant.medicareservice.entities.Appoinment;
 import com.cognizant.medicareservice.entities.Doctor;
 import com.cognizant.medicareservice.entities.Patient;
 import com.cognizant.medicareservice.entities.User;
 import com.cognizant.medicareservice.service.AgentService;
+import com.cognizant.medicareservice.service.AppointmentService;
 import com.cognizant.medicareservice.service.DoctorService;
 import com.cognizant.medicareservice.service.PatientService;
 import com.cognizant.medicareservice.service.UserService;
@@ -30,6 +35,8 @@ public class MedicareController {
 	PatientService patientService;
 	@Autowired
 	DoctorService doctorService;
+	@Autowired
+	AppointmentService appointmentService;
 
 	@GetMapping("/users")
 	public List<User> getAllUsers() {
@@ -58,7 +65,16 @@ public class MedicareController {
 		return doctorService.getAllDoctors();
 
 	}
+	@GetMapping("/doctor/{id}")
+	public Doctor getDoctor(@PathVariable int id) {
+		return doctorService.getDoctorById(id);
 
+	}
+	@GetMapping("/doctors/{medicareService}")
+	public List<Doctor> getAllDoctorsByMedicareService(@PathVariable String medicareService)
+	{
+	return	doctorService.getAllDoctorsByMedicareService(medicareService);
+	}
 	@PutMapping("/agent")
 	public void modifyAgent(@RequestBody Agent agent) {
 		agentService.modifyAgent(agent);
@@ -86,6 +102,10 @@ public class MedicareController {
 
 	@PutMapping("/patient/{id}")
 	public void modifyPatientStatus(@PathVariable Integer id) {
-		patientService.modifyPatientStatus(id);
+		patientService.modifyPatientStatus(id);}
+	
+	@PostMapping("/appointment")
+	public void addAppointment(@RequestBody @Valid Appoinment appointment)
+	{appointmentService.add(appointment);
 	}
 }

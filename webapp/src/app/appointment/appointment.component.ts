@@ -3,6 +3,11 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { DoctorService } from '../services/doctor.service';
 import { Doctor } from '../model/doctor.model';
+import { Appointment } from '../model/appointment.model';
+import { UserService } from '../services/user.service';
+import { User } from '../model/user.model';
+import { UserAuthService } from '../services/user-auth.service';
+import { AppointmentService } from '../services/appointment.service';
 
 @Component({
   selector: 'app-appointment',
@@ -13,10 +18,13 @@ export class AppointmentComponent implements OnInit {
 
  
   appointmentForm:FormGroup;
+  appointment:Appointment;
   doctorEdited=false;
   id:number;
-  doctors:Doctor[];
-  constructor(private route:ActivatedRoute,private doctorService:DoctorService, private router:Router) { }
+  doctors:Doctor;
+  user:User;
+  constructor(private route:ActivatedRoute,private doctorService:DoctorService, private router:Router,private userService:UserService,
+    private userAuthService:UserAuthService,private appointmentervice:AppointmentService) { }
 
   ngOnInit() {
 
@@ -30,72 +38,51 @@ export class AppointmentComponent implements OnInit {
     'doctor': new FormControl(null, [Validators.required,Validators.maxLength(20)]),
   
   });
-  // this.route.params.subscribe((params: Params) => {
-  //   const doctorId = params['id']
-  //   console.log(doctorId);
-  //   console.log("helllo doctor edit");
-  //   this.doctorService.getDoctor(doctorId).subscribe((doctor: Doctor) => {
-  //     console.log("helllooooooooooo"+doctor);
-  //     if (doctor) {
+    this.userService.getUser(this.userAuthService.getUser()).subscribe(data=>{
+      this.user=data;
+    })
+   this.route.params.subscribe((params: Params) => {
+  const doctorId = params['id']
+    console.log(doctorId);
+    console.log("Welcome to appointment");
+    this.doctorService.getDoctor(doctorId).subscribe((doctor: Doctor) => {
+      console.log("helllooooooooooo"+doctor);
+      
+      if (doctor) {
+        this.doctors=doctor;
+        doctor.dateOfBirth = new Date(doctor.dateOfBirth)
+     
+        this.appointmentForm.patchValue({
+          medicareService:doctor.medicareServices.medicareService,
+          doctor:"Dr "+doctor.firstName
+        })
+     
+     
+        
+      }
 
-  //       doctor.dateOfBirth = new Date(doctor.dateOfBirth)
-  //       this.doctorId=doctor.id
-  //       this.doctorEditForm.patchValue({
-
-  //         firstname:doctor.firstName,
-  //         lastname:doctor.lastName,
-  //         age:doctor.age,
-  //         gender:doctor.gender,
-  //         dateOfBirth:doctor.dateOfBirth.toISOString().slice(0, 10), 
-  //         contactNo:doctor.contactNo,
-  //         altContactNo:doctor.altContactNo,
-  //         email:doctor.email,
-  //         password:doctor.password,
-  //         address1:doctor.address1,
-  //         address2:doctor.address2,
-  //         city:doctor.city,
-  //         state:doctor.state,
-  //         zipCode:doctor.zipCode,
-  //         degree:doctor.degree,
-  //         speciality:doctor.speciality,
-  //         workHours:doctor.workHours,
-  //         hospitalName:doctor.hospitalName
-  //       }
-  //       )
-  //       console.log(doctor.firstName);
-  //     }
-
-  //   })
-  // })
+    })
+  })
     
 }
 
 onAppointmentFormSubmit(){
-  // this.doctorEdited=true
-  // this.updatedDoctorItem={
-  //   id:this.doctorId,
-  //   firstName:this.doctorEditForm.value.firstname,
-  //   lastName:this.doctorEditForm.value.lastname,
-  //   age:this.doctorEditForm.value.age,
-  //   gender:this.doctorEditForm.value.gender,
-  //   dateOfBirth:this.doctorEditForm.value.dateOfBirth,
-  //   contactNo:this.doctorEditForm.value.contactNo,
-  //   altContactNo:this.doctorEditForm.value.altContactNo,
-  //   email:this.doctorEditForm.value.email,
-  //   password:this.doctorEditForm.value.password,
-  //   address1:this.doctorEditForm.value.address1,
-  //   address2:this.doctorEditForm.value.address2,
-  //   city:this.doctorEditForm.value.city,
-  //   state:this.doctorEditForm.value.state,
-  //   zipCode:this.doctorEditForm.value.zipcode,
-  //   degree:this.doctorEditForm.value.degree,
-  //   speciality:this.doctorEditForm.value.speciality,
-  //   workHours:this.doctorEditForm.value.workHours,
-  //   hospitalName:this.doctorEditForm.value.hospitalName
-  // }
-  // this.doctorService.updateDoctor(this.updatedDoctorItem).subscribe(data=>{
-  //   console.log("subscribed in doctor edit");
-  // })
+  console.log(this.appointmentForm.value);
+  this.appointment={
+    
+    
+    patientFirstName:this.appointmentForm.value['patientFirstName'],
+    patientLastName:this.appointmentForm.value['patientLastName'],
+    bookingDate:this.appointmentForm.value['bookingDate'],
+    AppointmentDate:this.appointmentForm.value['AppointmentDate'],
+    doctor:this.doctors,
+    user:this.user
+
+  }
+  this.appointmentervice.addAppointment(this.appointment).subscribe(data=>{
+    console.log("Appointment added");
+  })
+ 
 }
 
 

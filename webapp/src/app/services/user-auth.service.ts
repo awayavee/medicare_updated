@@ -14,6 +14,7 @@ export class UserAuthService{
     token:string;
     user:string;
 
+
     constructor(){}
 
   
@@ -42,16 +43,7 @@ export class UserAuthService{
         this.user=user
     }
 
-    set username(username:string) {
-        this.username=username;
-      }
-    
-      set firstname(firstname:string) {
-       this.firstname=firstname
-      }
-      set lastname(lastname:string) {
-       this.lastname=lastname;
-      }
+   
 
     logOut(){
         this.redirectUrl='/';

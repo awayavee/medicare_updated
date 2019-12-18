@@ -83,10 +83,13 @@ public class AppUserDetailsService implements UserDetailsService {
 			} else if (newUser.getDoctor() != null) {
 				newUser.setAdmin(null);
 				Doctor newDoctor=newUser.getDoctor();
+				
 				MedicareServices ms=newDoctor.getMedicareServices();
+				System.out.println(ms);
 				ms.setMedicareService(newDoctor.getMedicareServices().getMedicareService());
 				ms.setServiceDescription(newDoctor.getMedicareServices().getServiceDescription());
 				ms.setAmount(newDoctor.getMedicareServices().getAmount());
+				
 				newDoctor.setMedicareServices(ms);
 				newUser.setDoctor(newDoctor);
 				

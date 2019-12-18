@@ -58,7 +58,6 @@ public class Doctor {
 	private String workHours;
 	@Column(name = "dc_hospital_name")
 	private String hospitalName;
-	@JsonIgnore
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "dc_ms_id")
 	private MedicareServices medicareServices;
@@ -71,7 +70,7 @@ public class Doctor {
 	public Doctor(int id, String firstName, String lastName, int age, String gender, Date dateOfBirth, String contactNo,
 			String altContactNo, String email, String password, String address1, String address2, String city,
 			String state, String zipCode, String degree, String speciality, String workHours, String hospitalName,
-			com.cognizant.medical.entities.MedicareServices medicareServices) {
+			MedicareServices medicareServices) {
 		super();
 		this.id = id;
 		this.firstName = firstName;

@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Doctor } from 'src/app/model/doctor.model';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { DoctorService } from 'src/app/services/doctor.service';
+import { MedicareService } from 'src/app/model/medicare-service.model';
 
 @Component({
   selector: 'app-doctor-edit',
@@ -14,6 +15,7 @@ export class DoctorEditComponent implements OnInit {
   doctorEditForm:FormGroup;
   doctorEdited=false;
   updatedDoctorItem:Doctor;
+  updatedMedicareServices:MedicareService;
   doctorId: number;
   workhours:string[]=['06:00-08:00am', '08:00-10:00am','10:00-12:00pm','12:00-02:00pm','02:00-04:00pm','04:00-06:00pm','06:00-08:00pm', '08:00-10:00pm',
   '10:00-12:00am','12:00-02:00am', '02:00-04:00am', '04:00-06:00'];
@@ -43,6 +45,9 @@ export class DoctorEditComponent implements OnInit {
     'speciality': new FormControl(null, [Validators.required,Validators.maxLength(50)]),
     'workHours': new FormControl(null, [Validators.required,Validators.maxLength(20)]),
     'hospitalName': new FormControl(null, [Validators.required,Validators.maxLength(100)]),
+    'medicareService': new FormControl(null, [Validators.required,Validators.maxLength(100)]),
+    'serviceDescription': new FormControl(null, [Validators.required,Validators.maxLength(100)]),
+    'amount': new FormControl(null, [Validators.required,Validators.pattern('^[0-9]+$'),Validators.maxLength(10)]),
   
   });
   this.route.params.subscribe((params: Params) => {
@@ -74,7 +79,11 @@ export class DoctorEditComponent implements OnInit {
           degree:doctor.degree,
           speciality:doctor.speciality,
           workHours:doctor.workHours,
-          hospitalName:doctor.hospitalName
+          hospitalName:doctor.hospitalName,
+          medicareService:doctor.medicareServices.medicareService,
+          serviceDescription:doctor.medicareServices.serviceDescription,
+          amount:doctor.medicareServices.amount,
+
         }
         )
         console.log(doctor.firstName);
@@ -86,7 +95,12 @@ export class DoctorEditComponent implements OnInit {
 }
 
 onDoctorEditFormSubmit(){
-  this.doctorEdited=true
+  this.doctorEdited=true;
+  this.updatedMedicareServices={
+    medicareService:this.doctorEditForm.value.medicareService,
+    serviceDescription:this.doctorEditForm.value.serviceDescription,
+    amount:this.doctorEditForm.value.amount
+  }
   this.updatedDoctorItem={
     id:this.doctorId,
     firstName:this.doctorEditForm.value.firstname,
@@ -106,7 +120,8 @@ onDoctorEditFormSubmit(){
     degree:this.doctorEditForm.value.degree,
     speciality:this.doctorEditForm.value.speciality,
     workHours:this.doctorEditForm.value.workHours,
-    hospitalName:this.doctorEditForm.value.hospitalName
+    hospitalName:this.doctorEditForm.value.hospitalName,
+    medicareServices:this.updatedMedicareServices
   }
   this.doctorService.updateDoctor(this.updatedDoctorItem).subscribe(data=>{
     console.log("subscribed in doctor edit");
@@ -173,5 +188,17 @@ get hospitalName(){
 }
 get status(){
   return this.doctorEditForm.get('status');
+}
+get medicareService()
+{
+  return this.doctorEditForm.get('medicareService');
+}
+get serviceDescription()
+{
+  return this.doctorEditForm.get('serviceDescription');
+}
+get amount()
+{
+  return this.doctorEditForm.get('amount');
 }
 }

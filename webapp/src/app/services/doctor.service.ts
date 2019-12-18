@@ -36,8 +36,18 @@ export class DoctorService{
                 'Authorization': 'Bearer ' + this.userAuthService.getToken()
             })
         }
-        return this.http.get<Doctor[]>(`${this.baseUrl + "/medicare/getDoctor"}/${doctorId}`, httpOptions)
+        return this.http.get<Doctor[]>(`${this.baseUrl + "/medicare/doctor"}/${doctorId}`, httpOptions)
     }
+    getDoctors(medicareServices: string): Observable<any> {
+        const httpOptions = {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + this.userAuthService.getToken()
+            })
+        }
+        return this.http.get<Doctor[]>(`${this.baseUrl + "/medicare/doctors"}/${medicareServices}`, httpOptions)
+    }
+
 
     updateDoctor(doctor: Doctor): Observable<any> {
         const httpOptions = {

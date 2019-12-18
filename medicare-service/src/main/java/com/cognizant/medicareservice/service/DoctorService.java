@@ -8,4 +8,6 @@ public interface DoctorService {
 	public List<Doctor> getAllDoctors();
 	public void modifyDoctor(Doctor doctor);
 	public void modifyDoctorStatus(Integer id);
+	public List<Doctor> getAllDoctorsByMedicareService(String medicareService);
+	public Doctor getDoctorById(int id);
 }

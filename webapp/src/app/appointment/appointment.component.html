@@ -55,13 +55,15 @@
                         <div class="col-12 col-sm-12 col-md-6 col-lg-4">
                             <div class="form-group">
                                 <label for="doctor">Doctor</label>
-                                <select name="doctor" formControlName="doctor" class="form-control">
-                                    <option [value]="doc" *ngFor="let doc of doctors">{{doc}}</option>
-                                    </select>
+                                <input type="text" name="doctor" formControlName="doctor" class="form-control">
+                                <span class="validation-error" *ngIf="doctor.touched && doctor.hasError('required')">Doctor name cannot be empty</span>
+                                <span class="validation-error" *ngIf="doctor.hasError('maxlength')">Doctor cannot exceed 50 characters.</span>
+                                <span class="validation-error" *ngIf="doctor.hasError('pattern')">Special Characters are not allowed</span>
+                                
                     </div>
                     </div>
                     <div class="row">
-                            <input type="submit" class="btn btn-danger" value="Register">
+                            <input type="submit" class="btn btn-danger" value="Book Appointment">
                     </div>
 
                 </form>

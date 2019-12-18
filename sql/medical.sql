@@ -42,6 +42,16 @@ CREATE TABLE IF NOT EXISTS `medical`.`patient` (
   PRIMARY KEY (`pt_id`))
 ENGINE = InnoDB;
 
+-- -----------------------------------------------------
+-- Table `medical`.`medicare_services`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `medical`.`medicare_services` (
+  `ms_id` INT NOT NULL AUTO_INCREMENT,
+  `ms_medicare_service` VARCHAR(50) NOT NULL,
+  `ms_service_description` VARCHAR(200) NOT NULL,
+  `ms_amount` DECIMAL(10) NOT NULL,
+  PRIMARY KEY (`ms_id`))
+ENGINE = InnoDB;
 
 -- -----------------------------------------------------
 -- Table `medical`.`doctor`
@@ -66,9 +76,15 @@ CREATE TABLE IF NOT EXISTS `medical`.`doctor` (
   `dc_speciality` VARCHAR(50) NOT NULL,
   `dc_work_hours` VARCHAR(100) NOT NULL,
   `dc_hospital_name` VARCHAR(100) NOT NULL,
-   `dc_status` tinyint(1) NULL,
-  `dc_ms_id` DECIMAL(10) NULL,
-  PRIMARY KEY (`dc_id`))
+	`dc_status` tinyint(1) NULL,
+  `dc_ms_id` INT NULL,
+  PRIMARY KEY (`dc_id`),
+   INDEX `fk_doctor_medicare_services1_idx` (`dc_ms_id` ASC),
+  CONSTRAINT `fk_doctor_medicare_services1`
+    FOREIGN KEY (`dc_ms_id`)
+    REFERENCES `medical`.`medicare_services` (`ms_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
@@ -96,16 +112,7 @@ CREATE TABLE IF NOT EXISTS `medical`.`agent` (
 ENGINE = InnoDB;
 
 
--- -----------------------------------------------------
--- Table `medical`.`medicare_services`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `medical`.`medicare_services` (
-  `ms_id` INT NOT NULL AUTO_INCREMENT,
-  `ms_medicare_service` VARCHAR(50) NOT NULL,
-  `ms_service_description` VARCHAR(200) NOT NULL,
-  `ms_amount` DECIMAL(10) NOT NULL,
-  PRIMARY KEY (`ms_id`))
-ENGINE = InnoDB;
+
 
 
 -- -----------------------------------------------------
