@@ -34,6 +34,7 @@ import { AppointmentComponent } from './appointment/appointment.component';
 import { ViewAppointmentComponent } from './view-appointment/view-appointment.component';
 import { MedicalTestHistoryComponent } from './medical-test-history/medical-test-history.component';
 import { ViewMedicareTestHistoryComponent } from './view-medicare-test-history/view-medicare-test-history.component';
+import { DatePipe } from '@angular/common';
 
 
 @NgModule({
@@ -73,7 +74,7 @@ import { ViewMedicareTestHistoryComponent } from './view-medicare-test-history/v
     HttpClientModule
 
   ],
-  providers: [AuthService, UserAuthService, AuthenticationService, UserService, DoctorService],
+  providers: [AuthService, UserAuthService, AuthenticationService, UserService, DoctorService,DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

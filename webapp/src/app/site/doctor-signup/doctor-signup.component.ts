@@ -6,6 +6,8 @@ import { User } from 'src/app/model/user.model';
 import { UserService } from 'src/app/services/user.service';
 import { Router } from '@angular/router';
 import { MedicareService } from 'src/app/model/medicare-service.model';
+import { DatePipe } from '@angular/common';
+
 
 @Component({
   selector: 'app-doctor-signup',
@@ -17,12 +19,15 @@ export class DoctorSignupComponent implements OnInit {
   user:User;
   medicareServices:MedicareService
   formSubmitted=false;
+  date:string;
+
+
 
   doctorRegisterForm=this.formBuilder.group({
     'username': new FormControl(null, [Validators.required,Validators.pattern('^[a-zA-Z0-9]+$'), Validators.maxLength(20)]),
     'firstname': new FormControl(null, [Validators.required,Validators.pattern('^[a-zA-Z0-9]+$'), Validators.maxLength(50)]),
     'lastname': new FormControl(null, [Validators.required,Validators.pattern('^[a-zA-Z0-9]+$'), Validators.maxLength(50)]),
-    'age': new FormControl(null, [Validators.required,Validators.pattern('^[0-9]+$'), Validators.maxLength(2)]),
+    'age': new FormControl(null, [Validators.required,Validators.pattern('^[0-9]+$'),Validators.maxLength(2)]),
     'gender': new FormControl(null, [Validators.required, Validators.maxLength(10)]),
     'dateOfBirth': new FormControl(null, [Validators.required]),
     'contactNo': new FormControl(null,[Validators.required, Validators.pattern('^[0-9]+$'), Validators.maxLength(10)]),
@@ -33,7 +38,7 @@ export class DoctorSignupComponent implements OnInit {
     'address2': new FormControl(null, [Validators.maxLength(100)]),
     'city': new FormControl(null, [Validators.required,Validators.maxLength(50)]),
     'state': new FormControl(null, [Validators.required,Validators.maxLength(50)]),
-    'zipcode': new FormControl(null, [Validators.required,Validators.maxLength(10),Validators.pattern('^[0-9]+$')]),
+    'zipcode': new FormControl(null, [Validators.required,Validators.maxLength(6),Validators.pattern('^[0-9]+$')]),
     'degree': new FormControl(null, [Validators.required,Validators.maxLength(50)]),
     'speciality': new FormControl(null, [Validators.required,Validators.maxLength(50)]),
     'workHours': new FormControl(null, [Validators.required,Validators.maxLength(20)]),
@@ -43,10 +48,10 @@ export class DoctorSignupComponent implements OnInit {
     'amount': new FormControl(null, [Validators.required,Validators.pattern('^[0-9]+$'),Validators.maxLength(10)]),
   
   });
-  constructor(private formBuilder:FormBuilder,private userService:UserService,private router:Router) { }
+  constructor(private formBuilder:FormBuilder,private userService:UserService,private router:Router,private datePipe:DatePipe) { }
 
   ngOnInit() {
-  
+  this.date=this.datePipe.transform(new Date(),'yyyy-MM-dd');
   }
   onSignUpSubmit(){
     console.log("helllo signup");
@@ -120,7 +125,10 @@ export class DoctorSignupComponent implements OnInit {
   get dateOfBirth(){
     return this.doctorRegisterForm.get('dateOfBirth');
   }
-
+  checkDateOfBirth()
+  {
+    return new Date(this.doctorRegisterForm.get('dateOfBirth').value).getTime()<new Date().getTime();
+  }
   get contactNo(){
     return this.doctorRegisterForm.get('contactNo');
   }

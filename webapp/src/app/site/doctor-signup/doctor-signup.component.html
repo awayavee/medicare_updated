@@ -60,9 +60,10 @@
                         <div class="col-12 col-sm-12 col-md-6 col-lg-4">
                             <div class="form-group">
                                 <label for="dateOfBirth">Date Of Birth</label>
-                                <input type="date" name="dateOfBirth" id="dateOfBirth" class="form-control"
+                                <input type="date" [min]="date" name="dateOfBirth" id="dateOfBirth" class="form-control"
                                     formControlName="dateOfBirth">
-                                    <span class="validation-error" *ngIf="dateOfBirth.touched && dateOfBirth.hasError('required')">Age  cannot be empty</span>
+                                    <span class="validation-error" *ngIf="dateOfBirth.touched && dateOfBirth.hasError('required')">Date cannot be empty</span>
+                                   
                 
                             </div>
                         </div>

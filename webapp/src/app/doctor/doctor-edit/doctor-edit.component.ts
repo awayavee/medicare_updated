@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, MinLengthValidator } from '@angular/forms';
 import { Doctor } from 'src/app/model/doctor.model';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { DoctorService } from 'src/app/services/doctor.service';
@@ -29,7 +29,7 @@ export class DoctorEditComponent implements OnInit {
     'username': new FormControl(null, [Validators.required,Validators.pattern('^[a-zA-Z0-9]+$'), Validators.maxLength(20)]),
     'firstname': new FormControl(null, [Validators.required,Validators.pattern('^[a-zA-Z0-9]+$'), Validators.maxLength(50)]),
     'lastname': new FormControl(null, [Validators.required,Validators.pattern('^[a-zA-Z0-9]+$'), Validators.maxLength(50)]),
-    'age': new FormControl(null, [Validators.required,Validators.pattern('^[0-9]+$'), Validators.maxLength(2)]),
+    'age': new FormControl(null, [Validators.required,Validators.pattern('^[0-9]+$'),Validators.min(0),Validators.maxLength(2)]),
     'gender': new FormControl(null, [Validators.required, Validators.maxLength(10)]),
     'dateOfBirth': new FormControl(null, [Validators.required]),
     'contactNo': new FormControl(null,[Validators.required, Validators.pattern('^[0-9]+$'), Validators.maxLength(10)]),
@@ -40,8 +40,8 @@ export class DoctorEditComponent implements OnInit {
     'address2': new FormControl(null, [Validators.maxLength(100)]),
     'city': new FormControl(null, [Validators.required,Validators.maxLength(50)]),
     'state': new FormControl(null, [Validators.required,Validators.maxLength(50)]),
-    'zipcode': new FormControl(null, [Validators.required,Validators.maxLength(10),Validators.pattern('^[0-9]+$')]),
-    'degree': new FormControl(null, [Validators.required,Validators.maxLength(50)]),
+    'zipcode': new FormControl(null, [Validators.required,Validators.maxLength(6),Validators.pattern('^[0-9]+$')]),
+    'degree': new FormControl(null, [Validators.required,Validators.maxLength(10)]),
     'speciality': new FormControl(null, [Validators.required,Validators.maxLength(50)]),
     'workHours': new FormControl(null, [Validators.required,Validators.maxLength(20)]),
     'hospitalName': new FormControl(null, [Validators.required,Validators.maxLength(100)]),
@@ -49,7 +49,9 @@ export class DoctorEditComponent implements OnInit {
     'serviceDescription': new FormControl(null, [Validators.required,Validators.maxLength(100)]),
     'amount': new FormControl(null, [Validators.required,Validators.pattern('^[0-9]+$'),Validators.maxLength(10)]),
   
-  });
+  }
+  
+  );
   this.route.params.subscribe((params: Params) => {
     const doctorId = params['id']
     console.log(doctorId);
@@ -93,6 +95,7 @@ export class DoctorEditComponent implements OnInit {
   })
     
 }
+
 
 onDoctorEditFormSubmit(){
   this.doctorEdited=true;
